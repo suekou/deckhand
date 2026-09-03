@@ -43,6 +43,7 @@ const elementStyle = (element: SlideElement): React.CSSProperties => {
     && Boolean(element.shapePreset)
     && !['rect', 'roundRect', 'ellipse'].includes(element.shapePreset ?? '');
   const isLine = element.type === 'line';
+  const padding = element.style.padding;
   return {
     left: `${element.x}%`,
     top: `${element.y}%`,
@@ -65,11 +66,20 @@ const elementStyle = (element: SlideElement): React.CSSProperties => {
     letterSpacing: unit(element.style.letterSpacing),
     textAlign: element.style.textAlign,
     opacity: element.style.opacity,
-    padding: element.style.padding ? unit(element.style.padding) : undefined,
-    paddingTop: element.style.paddingTop === undefined ? undefined : unit(element.style.paddingTop),
-    paddingRight: element.style.paddingRight === undefined ? undefined : unit(element.style.paddingRight),
-    paddingBottom: element.style.paddingBottom === undefined ? undefined : unit(element.style.paddingBottom),
-    paddingLeft: element.style.paddingLeft === undefined ? undefined : unit(element.style.paddingLeft),
+    // Expand the shorthand explicitly. Supplying `padding` together with
+    // undefined longhands makes React clear the shorthand sides in the DOM.
+    paddingTop: element.style.paddingTop === undefined
+      ? padding === undefined ? undefined : unit(padding)
+      : unit(element.style.paddingTop),
+    paddingRight: element.style.paddingRight === undefined
+      ? padding === undefined ? undefined : unit(padding)
+      : unit(element.style.paddingRight),
+    paddingBottom: element.style.paddingBottom === undefined
+      ? padding === undefined ? undefined : unit(padding)
+      : unit(element.style.paddingBottom),
+    paddingLeft: element.style.paddingLeft === undefined
+      ? padding === undefined ? undefined : unit(padding)
+      : unit(element.style.paddingLeft),
     justifyContent: element.type === 'text'
       ? element.style.verticalAlign === 'bottom'
         ? 'flex-end'

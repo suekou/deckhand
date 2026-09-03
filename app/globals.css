@@ -230,7 +230,10 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 .element-card { display: flex; flex-direction: column; justify-content: space-between; }
 .element-card-title { display: block; white-space: pre-line; line-height: inherit; letter-spacing: inherit; }
-.element-card-label { display: block; margin-top: auto; opacity: .64; font-size: .51em; font-weight: 500; line-height: 1.35; letter-spacing: -.01em; }
+.element-card-label {
+  display: block; margin-top: auto; padding-bottom: .34em;
+  opacity: .64; font-size: .51em; font-weight: 500; line-height: 1.35; letter-spacing: -.01em;
+}
 .element-stat { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .element-stat-value { line-height: .92; }
 .element-stat-label { width: 78%; margin-top: .55em; text-align: center; font-size: .22em; font-weight: 600; line-height: 1.3; }
